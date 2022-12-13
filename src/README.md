@@ -1,2 +1,2 @@
 - Run `sudo rm -f README.md`
-- Run `docker-compose run --rm composer create-project laravel/laravel .`
+- Run `cd .. && docker-compose run --rm composer create-project laravel/laravel .`
