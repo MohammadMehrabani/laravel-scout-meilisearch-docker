@@ -1,3 +1,4 @@
 .idea
 mysql
 meilisearch
+*.tar.gz

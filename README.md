@@ -1,0 +1,11 @@
+- Run `docker load -i laravel9-nginx.tar.gz`
+- Run `docker load -i laravel9-php.tar.gz`
+- Run `docker load -i laravel9-artisan.tar.gz`
+- Run `docker load -i laravel9-composer.tar.gz`
+- Run `mkdir meilisearch`
+- Run `sudo rm -f src/README.md`
+- Run `docker-compose up -d`
+- Run `docker-compose run --rm composer create-project laravel/laravel .`
+- Run `docker-compose run --rm composer require laravel/scout`
+- Run `docker-compose run --rm artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"`
+- Run `docker-compose run --rm composer require meilisearch/meilisearch-php http-interop/http-factory-guzzle`
