@@ -3,7 +3,6 @@ version: '3'
 networks:
   laravel:
 
-
 services:
   app:
     image: "docker-compose-laravel_app:latest"
@@ -13,8 +12,8 @@ services:
       - ./src:/var/www/html:delegated
     depends_on:
       - php
-#      - redis
       - mysql
+#      - redis
 #      - mailhog
     networks:
       - laravel
@@ -58,14 +57,6 @@ services:
     networks:
       - laravel
 
-#  redis:
-#    image: redis:alpine
-#    restart: unless-stopped
-#    ports:
-#      - "6379:6379"
-#    networks:
-#      - laravel
-
   composer:
     image: "docker-compose-laravel_composer:latest"
     volumes:
@@ -75,6 +66,24 @@ services:
     entrypoint: [ 'composer', '--ignore-platform-reqs' ]
     networks:
       - laravel
+
+  artisan:
+    image: "docker-compose-laravel_artisan:latest"
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - mysql
+    entrypoint: [ 'php', '/var/www/html/artisan' ]
+    networks:
+      - laravel
+
+#  redis:
+#    image: redis:alpine
+#    restart: unless-stopped
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - laravel
 
 #  npm:
 #    image: node:current-alpine
@@ -88,16 +97,6 @@ services:
 #    entrypoint: [ 'npm' ]
 #    networks:
 #      - laravel
-
-  artisan:
-    image: "docker-compose-laravel_artisan:latest"
-    volumes:
-      - ./src:/var/www/html:delegated
-    depends_on:
-      - mysql
-    entrypoint: [ 'php', '/var/www/html/artisan' ]
-    networks:
-      - laravel
 
 #  mailhog:
 #    image: mailhog/mailhog:latest
