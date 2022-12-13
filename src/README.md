@@ -1,0 +1,2 @@
+- ddelete `src/README.md`
+- Run `docker-compose run --rm composer create-project laravel/laravel .`
