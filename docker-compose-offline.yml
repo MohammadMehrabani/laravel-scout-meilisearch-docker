@@ -5,12 +5,7 @@ networks:
 
 services:
   app:
-    build:
-      context: ./dockerfiles
-      dockerfile: nginx.dockerfile
-      args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
+    image: "docker-compose-laravel_app:latest"
     ports:
       - "8089:80"
     volumes:
@@ -36,16 +31,13 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
     networks:
       - laravel
 
   php:
-    build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
-      args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
+    image: "docker-compose-laravel_php:latest"
     ports:
       - "9000:9000"
     volumes:
@@ -54,7 +46,7 @@ services:
       - laravel
 
   meilisearch:
-    image: getmeili/meilisearch:v0.30
+    image: "getmeili/meilisearch:v0.30"
     restart: unless-stopped
     ports:
       - "7700:7700"
@@ -66,12 +58,7 @@ services:
       - laravel
 
   composer:
-    build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
-      args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
+    image: "docker-compose-laravel_composer:latest"
     volumes:
       - ./src:/var/www/html
     depends_on:
@@ -81,12 +68,7 @@ services:
       - laravel
 
   artisan:
-    build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
-      args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
+    image: "docker-compose-laravel_artisan:latest"
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:

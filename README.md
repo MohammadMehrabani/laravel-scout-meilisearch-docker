@@ -1,17 +1,24 @@
+- generate random key E.g. Run `openssl rand -hex 30` or use other method for generating key
+- example key `173e95f077590ed33dad89247247be8d8ce8b6722ccc87829aaefe3207be`
+- Set into ./dockerfiles/meilisearch.env `MEILI_MASTER_KEY="173e95f077590ed33dad89247247be8d8ce8b6722ccc87829aaefe3207be"`
+- Run `mkdir meilisearch`
+- Run `sudo rm -f src/README.md`
+
+
+### if exist images files (laravel9-*.tar.gz)
 - Run `docker load -i laravel9-nginx.tar.gz`
 - Run `docker load -i laravel9-php.tar.gz`
 - Run `docker load -i laravel9-artisan.tar.gz`
 - Run `docker load -i laravel9-composer.tar.gz`
 - Run `docker load -i laravel9-mariadb.tar.gz`
 - Run `docker load -i laravel9-meilisearch_v0_30.tar.gz`
+- Run `docker-compose -f docker-compose-offline.yml up -d`
 
-
-- generate random key with Run `openssl rand -hex 30`
-- example output `173e95f077590ed33dad89247247be8d8ce8b6722ccc87829aaefe3207be`
-- Set into meilisearch.env `MEILI_MASTER_KEY="173e95f077590ed33dad89247247be8d8ce8b6722ccc87829aaefe3207be"`
-- Run `mkdir meilisearch`
-- Run `sudo rm -f src/README.md`
+### if dosen't exist imagess files (laravel9-*.tar.gz)
 - Run `docker-compose up -d`
+
+
+### create laravel project
 - Run `docker-compose run --rm composer create-project laravel/laravel .`
 - Run `docker-compose run --rm composer require laravel/scout`
 - Run `docker-compose run --rm artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"`
